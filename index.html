@@ -236,7 +236,13 @@ body.rm .ln .ln-i{transform:none !important;transition:none !important;}
   margin:5svh 0 7.5svh -0.02em;position:relative;z-index:2;
 }
 .vision p{position:relative;z-index:2;}
-.vision p{max-width:48ch;font-size:clamp(16px,1.35vw,21px);line-height:1.72;letter-spacing:0.004em;}
+.vision p {
+  max-width: 48ch;
+  font-size: clamp(16px, 1.35vw, 21px);
+  line-height: 1.72;
+  letter-spacing: 0.004em;
+  word-break: keep-all;
+}
 .vision p em{font-style:normal;color:var(--red);}
 
 .exp-list{display:flex;flex-direction:column;}
