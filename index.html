@@ -633,9 +633,11 @@ body.rm .scroll-hint .arrow::after{animation:none;}
     <div class="ct-cols">
       <div class="ct-col reveal">
         <h3>Inquiry</h3>
-        <form class="cform" id="cform" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-          <input type="hidden" name="form-name" value="contact">
-          <p class="hp"><label>Do not fill: <input name="bot-field"></label></p>
+        <form class="cform" id="cform" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="9cbc2150-133f-4f19-bec5-96adbd8bb384">
+          <input type="hidden" name="subject" value="[AIR] 홈페이지 문의가 접수되었습니다">
+          <input type="hidden" name="from_name" value="AIR Website">
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
           <div>
             <label for="cf-name">Name / 이름</label>
             <input id="cf-name" name="name" type="text" autocomplete="name" required>
@@ -814,10 +816,10 @@ body.rm .scroll-hint .arrow::after{animation:none;}
       const btn=cform.querySelector('.send');
       btn.disabled=true;btn.textContent='Sending…';
       try{
-        const res=await fetch('/',{method:'POST',
-          headers:{'Content-Type':'application/x-www-form-urlencoded'},
-          body:new URLSearchParams(new FormData(cform)).toString()});
-        if(!res.ok)throw new Error();
+        const res=await fetch('https://api.web3forms.com/submit',{method:'POST',
+          body:new FormData(cform)});
+        const data=await res.json();
+        if(!res.ok||!data.success)throw new Error();
         cform.querySelectorAll('div,button,.alt,.hp').forEach(el=>el.hidden=true);
         cform.querySelector('.cform-done').hidden=false;
       }catch(err){
